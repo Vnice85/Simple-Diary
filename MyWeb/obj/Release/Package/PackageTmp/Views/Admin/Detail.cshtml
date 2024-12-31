@@ -1,0 +1,80 @@
+﻿@model WebApplication2.Models.Content
+@{
+    ViewBag.Title = "Chi tiết";
+}
+<style>
+    .detail {
+        margin: 100px 0;
+    }
+
+    h1 {
+        color: #171717;
+        font-family: 'Times New Roman';
+        font-weight: bold;
+    }
+
+    .content {
+        color: #6f6f6f;
+        font-size: 17px;
+        font-family: 'Times New Roman';
+        line-height: 1.5;
+    }
+
+    img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+        margin: 20px 0 !important;
+        aspect-ratio: 1/1;
+    }
+
+    #main_image {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+    }
+
+
+    p {
+        color: #6f6f6f;
+    }
+
+    h1 {
+        font-size: 40px !important;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: black;
+        }
+</style>
+
+
+<div class="detail p-3">
+    <a href="/admin/delete?id=@Model.id" class="btn btn-outline-dark" title="Thêm mới" style="float:right; margin-right: 10px;"><i class="fa-solid fa-trash"></i></a>
+    <h1>@Model.main_content</h1>
+    <p style="font-size: 14px;"> @Model.date_upload.Value.ToString("'Ngày' dd 'tháng' MM 'năm' yyyy")</p>
+    <hr style="border: 1px dashed #6f6f6f;" />
+    <p style="margin-bottom: 0;"><b style="font-size:14px;">Author:</b> @@Van_Vnice</p>
+    <p><b style="font-size:14px;">Pill color: </b><span style="border-radius: 20px; padding: 0 10px; background-color: var(--@Model.id_color)">@Model.id_color</span></p>
+    <hr style="background: #6f6f6f; width: 100px; height: 1px; border: none;" />
+    <img id="main_image" src="@Url.Content(Model.main_image)" alt="Alternate Text" />
+    <hr style="border: 1px dashed #6f6f6f" />
+    <div class="content">
+        @Html.Raw(Model.content1)
+    </div>
+    <hr style="background: #6f6f6f; width: 200px; height: 1px; border: none;" />
+    <p style="margin:5px 0;"><b style="font-size:14px;">Van_Vnice</b></p>
+    <p>&copy; @DateTime.Now.Year - Đức Vấn</p>
+    <p>
+        <a href="/admin/index"> ⬸ Quay lại</a>
+    </p>
+
+</div>
+
+

@@ -1,0 +1,114 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "Gallery";
+}
+<style>
+    .gallery {
+        display: grid;
+        gap: 3px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+
+        img:hover {
+            opacity: 0.5;
+            transition: 0.5s ease-in-out;
+        }
+    .modal-overlay {
+        display: none; /* Ẩn mặc định */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8); /* Màu nền mờ */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Đảm bảo modal hiển thị trên các phần tử khác */
+    }
+
+    /* Định dạng ảnh trong modal */
+    .modal-image {
+        max-width: 90%; /* Đảm bảo ảnh không vượt quá chiều rộng màn hình */
+        max-height: 90%; /* Đảm bảo ảnh không vượt quá chiều cao màn hình */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Tạo bóng cho ảnh */
+        border-radius: 10px; /* Bo góc ảnh */
+        opacity: 1 !important;
+    }
+
+    body {
+        animation: none;
+    }
+  
+    /* Thư viện ảnh */
+
+    .lazyload {
+        filter: blur(10px); /* Làm mờ ảnh trước khi tải */
+    }
+
+
+        .lazyload.loaded {
+            filter: blur(0); /* Hiển thị ảnh rõ ràng khi đã tải */
+        }
+
+
+
+</style>
+
+
+<article class="container">
+    <h1><b>Ảnh tớ đã chụp</b></h1>
+
+    <p style="color: #6f6f6f;">
+            Đây là những bức ảnh mà tớ đã ghi lại!
+            Mỗi tấm ảnh là một khoảnh khắc mình muốn chia sẻ, hy vọng cậu sẽ thấy gần gũi và có chút cảm hứng từ những mảnh ghép đời thường này của mình!
+    </p>
+    <hr style="border: 1px dashed; margin: 30px 0;" />
+    <div class="gallery d-grid">
+        @foreach (var item in Model)
+        {
+            <a><img data-src="@Url.Content(item)" alt="img" class="lazyload" /></a>
+        }
+    </div>
+</article>
+<div class="d-flex justify-content-center mt-5">
+    <a class="ig_link" href="https://www.instagram.com/van_vnice"><b>Instagram của tớ..</b></a>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+     
+
+        const galleryImages = document.querySelectorAll(".gallery a img");
+        const modalOverlay = document.createElement("div");
+        modalOverlay.classList.add("modal-overlay");
+
+        const modalImage = document.createElement("img");
+        modalImage.classList.add("modal-image");
+        modalOverlay.appendChild(modalImage);
+
+        document.body.appendChild(modalOverlay);
+
+        galleryImages.forEach(image => {
+            image.addEventListener("click", function (e) {
+                e.preventDefault();
+                modalImage.src = this.src;
+                modalOverlay.style.display = "flex";
+            });
+        });
+
+        modalOverlay.addEventListener("click", function () {
+            modalOverlay.style.display = "none";
+        });
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+

@@ -1,0 +1,275 @@
+﻿@model List<WebApplication2.Models.Content>
+@{
+    ViewBag.Title = "Nhật ký";
+}
+
+<style>
+    * {
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    span {
+        margin-right: 10px;
+        color: #6f6f6f;
+        font-size: 14px;
+    }
+
+    .bound {
+        padding: 25px 0;
+        transition: ease-in-out 0.2s;
+        border-radius: 30px;
+    }
+
+        .bound:hover {
+            background-color: #f7f8f9;
+            transform: scale(1.01);
+            transition: ease-in-out 0.4s;
+        }
+
+    b {
+        font-size: 17px;
+    }
+
+
+    .short_content {
+        margin: 0;
+        color: #6f6f6f;
+        font-size: 14px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 26px;
+    }
+
+    p {
+        margin-bottom: 0;
+        color: #6f6f6f;
+        font-size: 14px;
+    }
+
+    .find {
+        background: rgb(249, 249, 249);
+        border: 1px solid rgb(241, 242, 244);
+        max-width: 100%;
+        height: 3.5em;
+        transition: 0.5s ease-in-out;
+        border-radius: 12px;
+    }
+
+        .find:focus {
+            border-color: rgb(241, 242, 244);
+            box-shadow: none;
+            background: rgb(249, 249, 249);
+            color: #6f6f6f;
+            font-weight: bold;
+        }
+
+        .find:not(:focus) {
+            color: #6f6f6f;
+            font-weight: bold;
+        }
+
+        .find::placeholder {
+            color: #6f6f6f;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+    html.dark-theme .find {
+        background-color: #222222;
+        border: 1px solid dimgrey;
+        max-width: 100%;
+        height: 3.5em;
+        border-radius: 12px;
+        transition: 0.5s ease-in-out;
+    }
+
+        html.dark-theme .find:focus {
+            border-color: dimgrey;
+            box-shadow: none;
+            background: #222222;
+            color: #6f6f6f;
+            font-weight: bold;
+        }
+
+        html.dark-theme .find:not(:focus) {
+            color: #6f6f6f;
+            font-weight: bold;
+        }
+
+        html.dark-theme .find::placeholder {
+            color: #6f6f6f;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+    ::selection {
+        background-color: lightpink;
+        color: white;
+        font-weight: bold;
+    }
+
+    header * {
+        margin-bottom: 10px;
+    }
+
+    .hdsd {
+        padding: 0 5px;
+        border-radius: 20px;
+        text-decoration: none;
+        color: #6f6f6f;
+        background-color: navajowhite;
+        transition: ease-in-out 0.5s;
+    }
+
+        .hdsd:hover {
+            color: #6f6f6f;
+            background-color: burlywood;
+            transition: ease-in-out 0.5s;
+        }
+
+
+    html.dark-theme .bound:hover {
+        background-color: #222222;
+    }
+
+    @@media only screen and (max-width: 700px) {
+        #pill-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #time-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .short_content {
+            margin: 0;
+            color: #6f6f6f;
+            font-size: 14px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 26px;
+        }
+
+        .bound {
+            padding: 15px 0;
+        }
+    }
+</style>
+
+
+<header style="padding:0 10px;">
+    <h1 style="font-weight: bold;">Nhật ký uống thuốc</h1>
+    <h5 style="color: #6f6f6f">Xem HDSD thuốc tại <a class="hdsd" href="/diary/instruction">đây</a> </h5>
+    <span>Nhật ký về những viên thuốc mà tớ đã uống</span>
+    <hr style="border: 1px dashed black; flex-grow: 1; margin-right:10px;" />
+    <p>Tìm kiếm về nhật ký thuốc dựa theo màu sắc hoặc nội dung chính: </p>
+    <input type="text" name="find_keyword" id="find_keyword" class="form-control find" placeholder="Tìm kiếm post..." spellcheck="false" value="" />
+    <hr style="margin-bottom: 30px;" />
+
+</header>
+<div id="post">
+
+    @foreach (var item in Model)
+    {
+        string colorName = string.Empty;
+        switch (item.id_color)
+        {
+            case "yellow":
+                colorName = "Thuốc Vàng";
+                break;
+            case "pink":
+                colorName = "Thuốc Hồng";
+                break;
+            case "light-violet":
+                colorName = "Thuốc Tím Nhạt";
+                break;
+            case "red":
+                colorName = "Thuốc Đỏ";
+                break;
+            case "violet":
+                colorName = "Thuốc Tím Đậm";
+                break;
+            case "blue":
+                colorName = "Thuốc Xanh";
+                break;
+            case "green":
+                colorName = "Thuốc Xanh";
+                break;
+            default:
+                colorName = "Nhật ký";
+                break;
+        }
+        <a style="text-decoration: none;" href="/diary/detail?id=@item.id">
+            <div class="bound">
+                <div class="container">
+                    <img src="@Url.Content(item.main_image)" alt="Alternate Text" loading="lazy" />
+                </div>
+                <div class="container">
+                    <hr style="margin-top:25px;" />
+                    <div class="d-flex align-items-center">
+                        <div id="pill-wrapper">
+                            <span style="border-radius: 0 20px 0 0 ; padding: 5px 5px 0 2px;  background-color: var(--@item.id_color)">
+                                <b>@colorName</b>
+                            </span>
+                            <span class="content" style="font-size: 17px; font-weight: 500; margin-top:5px;">@item.main_content</span>
+                        </div>
+                        <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
+                        <div id="time-wrapper">
+                            <span id="date-title"><b style="font-size: 14px;">Ngày đăng:</b></span>
+                            <span>@(item.date_upload.Value.ToString("dd/MM/yyyy"))</span>
+                        </div>
+                    </div>
+                    <div class="short_content">
+                        <p> @Html.Raw(item.content1)</p>
+                    </div>
+                    <div class="d-flex">
+                        <span style="margin-left:0;"><b style="font-size:14px;">Author:</b> @@Van_Vnice</span>
+                        <hr style="border: 1px dashed #6f6f6f; max-width: 730px; flex-grow: 1; " />
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+
+    <div class="text-center mt-5 pt-5">
+        <hr />
+        <P><b>- THE END -</b></P>
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#find_keyword').on('input', function () {
+            var search = $(this).val();
+            $.ajax({
+                url: '@Url.Action("Find","diary")',
+                type: 'GET',
+                data: { find_keyword: search },
+                success: function (data) {
+                    $('#post').html(data);
+                }
+
+            })
+        })
+    })
+</script>
+
+

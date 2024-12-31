@@ -1,0 +1,98 @@
+﻿@model WebApplication2.Models.Content
+
+@{
+    ViewBag.Title = "Thêm mới";
+}
+<style>
+    body {
+        background-color: #85683348;
+    }
+
+   
+</style>
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@using (Ajax.BeginForm("create","admin", new AjaxOptions
+{
+    UpdateTargetId = "show",
+    LoadingElementId = "load",
+    InsertionMode = InsertionMode.Replace
+}, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal mt-5" id="show">
+    <div class="text-center"><h1>THÊM NHẬT KÝ</h1></div>
+    <hr />
+    <div class="d-flex">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group m-4">
+            <label for="main_content">Title</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.main_content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.main_content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group m-4">
+            <label for="main_imag">Main Image</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.main_image, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                @Html.ValidationMessageFor(model => model.main_image, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group m-4">
+            <label for="id_color">Pill</label>
+            <div class="col-md-10">
+                <select name="id_color" class="form-select">
+                    @foreach (var item in ViewBag.id_color)
+                    {
+                        <option value="@item.id_color" style="background-color: var(--@item.id_color)">@item.color_name</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group m-3">
+        <label>Nội dung nhật ký: </label>
+        <div>
+
+            @Html.TextAreaFor(model => model.content1, new { @id = "text" })
+            @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        <input class="btn btn-outline-danger w-100 m-5" type="submit" value="Create" />
+    
+    </div>
+</div>
+}
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('text', {
+        filebrowserUploadUrl: "/diary/upload",
+       
+    })
+
+</script>
+
+
+
+
+
+
+
+<div class="mt-5">
+    @Html.ActionLink("Back to Home", "Index", "Admin")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

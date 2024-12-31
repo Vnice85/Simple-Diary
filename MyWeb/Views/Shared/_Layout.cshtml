@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!-- Ngăn flash of unstyled content -->
+    <script>
+        // Kiểm tra theme ngay lập tức
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="~/favicon.svg" rel="icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        :root {
+            --yellow: #FFFFB5;
+            --pink: #FEE1E8;
+            --light-violet: #F3E4F5;
+            --red: #FD8A8A;
+            --violet: #D8BEE5;
+            --blue: #BEDDF1;
+            --green: #D1FEB8;
+            --default: #ebeced;
+        }
+
+        ::selection {
+            background-color: lightpink;
+            color: black;
+        }
+
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        a {
+            text-decoration: none;
+            color: #6f6f6f;
+        }
+
+        /* Theme styling */
+        html {
+            background-color: white;
+            /*transition: background-color 0.5s ease-in-out;*/
+        }
+
+            html.dark-theme {
+                background-color: #161616;
+            }
+
+        body {
+            background-color: inherit;
+            color: black;
+            font-family: "Josefin Sans", serif;
+            transition: color 0.5s ease-in-out;
+        }
+
+        html.dark-theme body {
+            color: white;
+        }
+
+        /* Icon bar styling */
+        .icon-bar {
+            background-color: #f8f9fa;
+            color: #858585;
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        html.dark-theme .icon-bar {
+            background-color: #222222;
+        }
+
+        .icon-bar a {
+            font-size: 24px;
+            border-radius: 10px;
+            transition: 0.1s ease-in-out;
+        }
+
+            .icon-bar a:active {
+                transform: scale(1.5);
+            }
+
+        .fa, .fab {
+            font-size: 20px;
+            color: #858585;
+            padding: 10px;
+            background-color: #e2e6ea;
+            border-radius: 10px;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        }
+
+        html.dark-theme .fa,
+        html.dark-theme .fab {
+            color: #7e7e7e;
+            background-color: #161616;
+        }
+
+        h1 {
+            color: black;
+            transition: color 0.5s ease-in-out;
+        }
+
+        html.dark-theme h1 {
+            color: white;
+        }
+
+        /*Page transition animation*/
+        .page-content {
+            animation: fade 0.4s ease-in-out;
+        }
+
+        @@keyframes fade {
+            from {
+                opacity: 0.0;
+                transform: translateY(50px);
+            }
+
+            to {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+
+        html.dark-theme hr {
+            color: #6f6f6f;
+        }
+
+        .fixed-bottom {
+            z-index: 10;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="page-content" style="max-width: 800px; margin: 0 auto; padding: 50px 10px 300px;">
+
+        @RenderBody()
+        <nav class="container p-3 mt-5 fixed-bottom" style="max-width: 550px;">
+            <div class="icon-bar w-100">
+                <a href="/"><i class="fa fa-home" title="Màn hình chính"></i></a> |
+                <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="/diary/gallery" title="Ảnh"><i class="fa fa-image"></i></a>
+                <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>
+                <a href="/diary" title="Nhật ký"><i class="fa fa-book"></i></a> |
+                <a href="#" title="Lên đầu"><i class="fa fa-chevron-up"></i></a>
+            </div>
+        </nav>
+    </div>
+
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        $(document).ready(function () {
+            const html = document.documentElement;
+
+            $('#theme-toggle').on('click', function (e) {
+                //e.preventDefault();
+                if (localStorage.getItem('theme') === 'dark') {
+                    localStorage.removeItem('theme');
+                    html.classList.remove('dark-theme');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    html.classList.add('dark-theme');
+                }
+            });
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

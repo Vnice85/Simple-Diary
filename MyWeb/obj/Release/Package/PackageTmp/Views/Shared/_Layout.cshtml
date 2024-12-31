@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="~/favicon.svg" rel="icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        :root {
+            --yellow: #FFFFB5;
+            --pink: #FEE1E8;
+            --light-violet: #F3E4F5;
+            --red: #FD8A8A;
+            --violet: #D8BEE5;
+            --blue: #BEDDF1;
+            --green: #D1FEB8;
+            --default: #ebeced;
+        }
+
+        ::selection {
+            background-color: lightpink;
+            color: white;
+        }
+
+        html {
+            scrollbar-gutter: stable;
+        }
+
+        a {
+            color: #6f6f6f;
+        }
+
+        nav {
+        }
+
+        .icon-bar {
+            color: #858585;
+            background-color: #f8f9fa;
+            border-radius: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+            .icon-bar a {
+                font-size: 24px;
+                border-radius: 10px;
+                transition: 0.1s ease-in-out;
+            }
+
+                .icon-bar a:active {
+                    transform: scale(1.5);
+                    transition: 0.1s ease-in-out;
+                }
+           
+        body {
+            background-color: white; 
+            color: black; 
+            transition: background-color 0.5s ease-in-out, color 1s ease-in-out; 
+        }
+        body.dark-theme {
+            background-color: #161616;
+            color: white;
+            transition: background-color 0.5s ease-in-out, color 1s ease-in-out;
+           
+        }
+            body.dark-theme h1 {
+                color: white !important;
+                transition: background-color 0.5s ease-in-out, color 1s ease-in-out;
+            }
+            body.dark-theme .icon-bar {
+                color: #858585;
+                background-color: #222222;
+                border-radius: 20px;
+                padding: 10px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                overflow: auto;
+            }
+            body.dark-theme .fa, body.dark-theme .fab {
+                font-size: 20px;
+                color: #7e7e7e;
+                padding: 10px;
+                background-color: #161616;
+                border-radius: 10px;
+            }
+               
+        h1 {
+            color: black;
+            transition: background-color 0.5s ease-in-out, color 1s ease-in-out;
+        }
+
+        .fa, .fab {
+            font-size: 20px;
+            color: #858585;
+            padding: 10px;
+            background-color: #e2e6ea;
+            border-radius: 10px;
+        }
+        body {
+            animation: fade 0.4s;
+        }
+
+        @@keyframes fade {
+            from {
+                opacity: 0.0;
+                padding-top:500px;
+            }
+
+            to {
+                padding-top: 0;
+                opacity: 1;
+                transition: ease-in-out;
+            }
+        }
+    </style>
+</head>
+
+<body style="">
+
+    <div style="max-width: 800px;   margin: 0 auto; padding: 0 5px 300px;">
+        @RenderBody()
+
+      
+        <nav class="container p-3 mt-5 fixed-bottom" style="max-width: 550px;">
+            <div class="icon-bar w-100">
+                <a href="/"><i class="fa fa-home" title="Màn hình chính"></i></a> |
+                <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/van_vnice" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="/diary/gallery" title="Ảnh"><i class="fa fa-image"></i></a>
+                <a title="Theme"><i class="fa fa-sun"></i></a>
+                <a href="/diary" title="Nhật ký"><i class="fa fa-book"></i></a> |
+                <a href="#" title="Lên đầu"><i class="fa fa-chevron-up"></i></a>
+            </div>
+        </nav>
+
+    </div>
+   
+
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function () {
+    // Kiểm tra và áp dụng theme từ sessionStorage khi trang tải
+    if (sessionStorage.theme === "dark") {
+        $("body").addClass("dark-theme");
+    }
+
+    // Toggle theme khi click vào button
+    $(".fa-sun").on("click", function () {
+        if (sessionStorage.theme === "dark") {
+            // Chuyển sang light theme
+            sessionStorage.removeItem("theme");
+            $("body").removeClass("dark-theme");
+        } else {
+            // Chuyển sang dark theme
+            sessionStorage.theme = "dark";
+            $("body").addClass("dark-theme");
+        }
+    });
+});
+
+
+    </script>
+
+
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
