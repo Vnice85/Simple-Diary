@@ -13,6 +13,8 @@ using WebApplication2.Models;
 using System.Net.NetworkInformation;
 using System.Web.UI.WebControls;
 using System.Data.Entity;
+using PagedList;
+using System.Runtime.Remoting.Contexts;
 
 namespace MyWeb.Controllers
 {
@@ -21,10 +23,15 @@ namespace MyWeb.Controllers
         private MyDiary db = new MyDiary();
 
 
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? size)
         {
-            return View(db.Contents.OrderByDescending(c => c.id).ToList());
+            int pageNumber = page ?? 1;
+            int pageSize = size ?? 10;
+            var pagedList = db.Contents.OrderByDescending(c => c.id).ToPagedList(pageNumber, pageSize);
+            return View(pagedList);
         }
+       
+
 
         public ActionResult Instruction()
         {
@@ -125,6 +132,5 @@ namespace MyWeb.Controllers
             }
             return View(imglist); // Trả danh sách đường dẫn ảnh tới View
         }
-       
     }
 }

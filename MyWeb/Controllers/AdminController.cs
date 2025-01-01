@@ -30,13 +30,13 @@ namespace WebApplication2.Controllers
             ViewBag.id_color = db.Colors.ToList();
             return View();
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create(Content content, HttpPostedFileBase main_image)
         {
-           var tmp = new Content();
+            var tmp = new Content();
             if (main_image != null && main_image.ContentLength > 0)
             {
                 string root = Server.MapPath("/Data");
@@ -49,26 +49,26 @@ namespace WebApplication2.Controllers
                 ViewBag.id_color = db.Colors.ToList();
                 return View(content);
             }
-                tmp.main_content = content.main_content;
-                tmp.id_color = content.id_color;
-                tmp.date_upload = DateTime.Now;
-                tmp.content1 = content.content1;
-                db.Contents.Add(tmp);
-                db.SaveChanges();
-             return View();
-             //return RedirectToAction("Index", "Admin");
+            tmp.main_content = content.main_content;
+            tmp.id_color = content.id_color;
+            tmp.date_upload = DateTime.Now;
+            tmp.content1 = content.content1;
+            db.Contents.Add(tmp);
+            db.SaveChanges();
+            ViewBag.id_color = db.Colors.ToList();
+            return View(content);
 
         }
         [HttpPost]
         public ActionResult Delete(List<int> id)
         {
-            foreach(var item in id)
+            foreach (var item in id)
             {
                 var x = db.Contents.Find(item);
-                 db.Contents.Remove(x);
+                db.Contents.Remove(x);
                 db.SaveChanges();
             }
-            return PartialView("Show", db.Contents.OrderByDescending(x=>x.id).ToList());
+            return PartialView("Show", db.Contents.OrderByDescending(x => x.id).ToList());
         }
 
         public ActionResult Index2()
