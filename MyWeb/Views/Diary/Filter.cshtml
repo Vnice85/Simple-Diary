@@ -1,0 +1,106 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebApplication2.Models.Content>
+
+
+<style>
+      #show {
+        animation-name: fade;
+        animation-duration: 0.5s;
+    }
+
+    @@keyframes fade {
+        from {
+            opacity: 0.0;
+        }
+
+        to {
+            opacity: 1;
+            transition: ease-in-out;
+        }
+
+    }
+    
+</style>
+<div id="show">
+
+
+@if (Model.Count() <= 0)
+{
+    <div class="text-center">
+        <span style=" padding: 15px; background-color: navajowhite; "><b style=" font-size: 25px;">KHÔNG CÓ DỮ LIỆU</b></span>
+    </div>
+
+}
+else
+{
+    foreach (var item in Model)
+    {
+        string colorName = string.Empty;
+        switch (item.id_color)
+        {
+            case "yellow":
+                colorName = "Thuốc Vàng";
+                break;
+            case "pink":
+                colorName = "Thuốc Hồng";
+                break;
+            case "light-violet":
+                colorName = "Thuốc Tím Nhạt";
+                break;
+            case "red":
+                colorName = "Thuốc Đỏ";
+                break;
+            case "violet":
+                colorName = "Thuốc Tím Đậm";
+                break;
+            case "blue":
+                colorName = "Thuốc Xanh";
+                break;
+            case "green":
+                colorName = "Thuốc Xanh";
+                break;
+            default:
+                colorName = "Nhật ký";
+                break;
+        }
+        <a style="text-decoration: none;" href="/diary/detail?id=@item.id">
+            <div class="bound">
+                <div class="container">
+                    <img src="@Url.Content(item.main_image)" alt="Alternate Text" loading="lazy" />
+                </div>
+                <div class="container">
+                    <hr style="margin-top:25px;" />
+                    <div class="d-flex align-items-center">
+                        <div id="pill-wrapper">
+                            <span style="border-radius: 0 20px 0 0 ; padding: 5px 5px 0 2px;  background-color: var(--@item.id_color)">
+                                <b>@colorName</b>
+                            </span>
+                            <span class="content" style="font-size: 17px; font-weight: 500; margin-top:5px;">@item.main_content</span>
+                        </div>
+                        <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
+                        <div id="time-wrapper">
+                            <span id="date-title"><b style="font-size: 14px;">Ngày đăng:</b></span>
+                            <span>@(item.date_upload.Value.ToString("dd/MM/yyyy"))</span>
+                        </div>
+                    </div>
+                    <div class="short_content lazyload">
+                        <p> @Html.Raw(item.content1)</p>
+                    </div>
+                    <div class="d-flex">
+                        <span style="margin-left:0;"><b style="font-size:14px;">Author:</b> @@Van_Vnice</span>
+                        <hr style="border: 1px dashed #6f6f6f; max-width: 730px; flex-grow: 1; " />
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+    <div class="text-center mt-3">
+        <div class="d-flex justify-content-end m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("index", new { page, find_keyword = Request["find_keyword"] }))</div>
+    </div>
+
+
+}
+
+</div>

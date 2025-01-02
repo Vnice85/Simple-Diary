@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Introduction";
+}
+
+<style>
+    * {
+        color: #6f6f6f;
+    }
+
+    .fab {
+        background-color: transparent;
+    }
+    html, body {
+        margin: 0; /* Loại bỏ khoảng cách mặc định */
+        padding: 0; /* Loại bỏ padding mặc định */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        min-height: 100vh; /* Chiếm toàn bộ chiều cao */
+    }
+
+    body {
+        background-image: url(/Data/profile-modified.jpg);
+        background-size: cover;
+      
+    
+    }
+    .wrapper {
+        background-color: #0000008c;
+        border-radius: 20px;
+    }
+   
+    html {
+        scrollbar-gutter: auto !important;
+    }
+    .page-content {
+     padding: 20px 0 !important;
+  
+    }
+    nav {
+        display: none;
+    }
+
+    html.dark-theme .fa,
+    html.dark-theme .fab,
+    html.dark-theme .fas {
+       background-color: transparent;
+    }
+
+    .wrapper {
+        padding: 50px 20px;
+        margin: 0 10px;
+    }
+    .social-network {
+        display: flex;
+        justify-content: space-around
+      
+    }
+        @@media screen and (max-width : 900px) {
+            .social-network {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+</style>
+
+<div class="wrapper text-center">
+
+    <img src="~/Images/profile.jpg" alt="Alternate Text" style="max-width: 200px; aspect-ratio: 1/1; border-radius: 100%; " />
+    <p style="font-size: 50px; font-weight: bold; margin-top: 10px; border-bottom: 1px dashed #6f6f6f; border-radius: 20px;">Van - Vnice</p>
+    @*<audio style=" width: 300px;  height: 40px;   border-radius: 8px;  background-color: #f1f3f4;" id="myaudio" controls>
+        <source src="~/Data/Audio/Ghé Qua - Dick x Tofu x PC [Official Audio].mp3" type="audio/mp3" />
+        <source src="~/Data/Audio/Ghé Qua - Dick x Tofu x PC [Official Audio].mp3" type="audio/ogg" />
+        Trình duyệt của bạn không hỗ trợ
+    </audio>*@
+    <p style="margin: 0;">Cựu thiếu nhi, con của bố mẹ, em của các anh, anh của các em - một người thường</p>
+    <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
+
+    <div style="text-align: justify; padding: 0 20px;">
+        <p>
+            Hi guys !! Tớ tên thật là Vấn, sinh viên chuyên ngành Khoa học máy tính tại HaUI. Tớ có rất nhiều sở thích,
+            một vài sở thích của tớ mà tớ có thể kể cho cậu đó là ăn, ngủ, nghe nhạc và chơi Piano.
+        </p>
+        <div class="text-center mb-4">
+            <div style="display: inline-block; height: 40px; border-left: 5px solid #6f6f6f; font-size: 15px; ">
+                <i>Không có việc gì khó, <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nếu khó thì không làm...</i>
+            </div>
+        </div>
+        <p>
+            Nếu cậu đã tìm được website này và vẫn còn đang ngồi đọc những dòng chữ này thì <i>oh yeahh</i>,
+            chỉ có thể là cậu có duyên với tớ thôi haha. Vậy thì sao không lập tức kết bạn, rồi chúng ta cùng trở nên vô tri nhỉ :>
+        </p>
+        <div class="social-network">
+            <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"> </i>: Vấn </a> 
+            <a href="https://www.instagram.com/van_vnice" target="_blank" title="Instagram"><i class="fab fa-instagram"></i>: van_vnice </a> 
+            <a href="https://www.tiktok.com/&commat;vnice85" target="_blank" title="Tiktok"><i class="fab fa-tiktok"></i>: vnice85 </a> 
+        </div>
+        <div class="text-center ">
+            <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
+            <a href="/diary/index" class="btn btn-outline-danger mt-3">Khám phá</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const audio = $("#myAudio")[0]; // Truy cập thẻ audio qua jQuery
+
+        // Phát âm thanh khi người dùng nhấp vào trang
+        $("body").on("click", function () {
+            audio.play();
+        });
+    });
+</script>

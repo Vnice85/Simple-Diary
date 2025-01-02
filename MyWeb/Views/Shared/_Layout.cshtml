@@ -89,6 +89,7 @@
 
         html.dark-theme .icon-bar {
             background-color: #222222;
+            transition: 0.1s ease-in-out;
         }
 
         .icon-bar a {
@@ -101,24 +102,25 @@
                 transform: scale(1.5);
             }
 
-        .fa, .fab {
+        .fa, .fab, .fas {
             font-size: 20px;
             color: #858585;
             padding: 10px;
             background-color: #e2e6ea;
             border-radius: 10px;
-            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+   
         }
 
         html.dark-theme .fa,
-        html.dark-theme .fab {
+        html.dark-theme .fab,
+        html.dark-theme .fas {
             color: #7e7e7e;
             background-color: #161616;
         }
 
         h1 {
             color: black;
-            transition: color 0.5s ease-in-out;
+          
         }
 
         html.dark-theme h1 {
@@ -159,13 +161,13 @@
         <nav class="container p-3 mt-5 fixed-bottom" style="max-width: 550px;">
             <div class="icon-bar w-100">
                 <a href="/"><i class="fa fa-home" title="Màn hình chính"></i></a> |
-                <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="/diary/index" title="Nhật ký"><i class="fa fa-book"></i></a>
                 <a href="/diary/gallery" title="Ảnh"><i class="fa fa-image"></i></a>
-                <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>
-                <a href="/diary" title="Nhật ký"><i class="fa fa-book"></i></a> |
+                <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>|
                 <a href="#" title="Lên đầu"><i class="fa fa-chevron-up"></i></a>
             </div>
         </nav>
+
     </div>
 
     <script src="~/Scripts/jquery-3.7.0.js"></script>
