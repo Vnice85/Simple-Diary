@@ -32,16 +32,20 @@
         @RenderBody()
         <nav class="container p-3 mt-5 fixed-bottom" style="max-width: 550px;">
             <div class="icon-bar w-100">
-                <a href="/diary/index"><i class="fa fa-home" title="Màn hình chính"></i></a> |
-                <a href="/" title="Nhật ký"><i class="fa fa-user"></i></a>
-                <a href="/diary/gallery" title="Ảnh"><i class="fa fa-image"></i></a>
-                <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>
-                <a href="#" title="Lên đầu"><i class="fa fa-chevron-up"></i></a>
+                <a href="/diary/index" title="Home"><i class="fa fa-home" ></i></a> |
+                <a href="/" title="About"><i class="fa fa-user"></i></a>
+                <a href="/diary/gallery" title="Gallery"><i class="fa fa-image"></i></a>
+                <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>|
+                <a title="Hide"><i class="fa fa-chevron-down"></i></a>
             </div>
+
         </nav>
+        <div class="fixed-bottom nav_show text-center" style="display: none;">
+            <a ><i class="fa fa-chevron-up"></i></a>
+        </div>
 
     </div>
-
+  
     <script src="~/Scripts/jquery-3.7.0.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
@@ -49,7 +53,6 @@
     <script>
         $(document).ready(function () {
             const html = document.documentElement;
-
             $('#theme-toggle').on('click', function (e) {
                 if (localStorage.getItem('theme') === 'dark') {
                     localStorage.removeItem('theme');
@@ -59,6 +62,17 @@
                     html.classList.add('dark-theme');
                 }
             });
+
+            $('.fa-chevron-down').on('click', function () {
+                $('nav').hide();
+                $('.nav_show').show();
+
+            })
+            $('.fa-chevron-up').on('click', function () {
+                $('nav').show();
+                $('.nav_show').hide();
+
+            })
         });
     </script>
 

@@ -54,7 +54,8 @@
             <label>Nội dung nhật ký: </label>
             <div>
 
-                @Html.TextAreaFor(model => model.content1, new { @id = "text" })
+                <textarea id="text" name="content1" style="background-color: black"></textarea>
+                @*@Html.TextAreaFor(model => model.content1, new { @id = "text" })*@
                 @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -53,20 +53,20 @@ html.dark-theme body {
 
 /* Icon bar styling */
 .icon-bar {
-    background-color: #f8f9fa;
+    background-color: #ffffff63;
     color: #858585;
     border-radius: 20px;
     padding: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     overflow: auto;
     transition: background-color 0.5s ease-in-out;
 }
 
 html.dark-theme .icon-bar {
-    background-color: #222222;
+    background-color: #00000054;
     transition: 0.1s ease-in-out;
 }
 
@@ -80,19 +80,17 @@ html.dark-theme .icon-bar {
         transform: scale(1.5);
     }
 
-.fa, .fab, .fas {
+.fa, .fab {
     font-size: 20px;
-    color: #858585;
+    color: #404040;
     padding: 10px;
-    background-color: #e2e6ea;
+    background-color: transparent;
     border-radius: 10px;
 }
 
 html.dark-theme .fa,
-html.dark-theme .fab,
-html.dark-theme .fas {
+html.dark-theme .fab {
     color: #7e7e7e;
-    background-color: #161616;
 }
 
 h1 {

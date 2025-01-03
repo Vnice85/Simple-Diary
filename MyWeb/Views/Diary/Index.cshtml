@@ -7,18 +7,22 @@
 }
 <link href="~/Content/DiaryStyle.css" rel="stylesheet" />
 
-<header style="padding:0 10px;">
-    <h1 style="font-weight: bold;">Nhật ký</h1>
-    <span>Hiii, Đây là nơi tớ viết vớ vẩn về cuộc sống</span>
+<header style="padding:0px;">
+    <div class="text-center">
+        <h1 style="font-weight: bold;">Nhật ký</h1>
+        <span>Hiii, Đây là nơi tớ viết vớ vẩn về cuộc sống</span>
+    </div>
     <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
-    <p>Tìm kiếm nhật ký dựa theo màu sắc, nội dung chính: </p>
+    <p style="margin:0 0 15px 15px;">Tìm kiếm nhật ký dựa theo màu sắc, nội dung chính: </p>
     <div class="d-flex position-relative">
-        <input type="text" name="find_keyword" id="find_keyword" class="form-control find" placeholder="Tìm kiếm post..." spellcheck="false" value="" />
-        <button style="position: absolute; right:0;" class="btn btn-default" id="find_button" type="button">
-        <i class="fas fa-search"></i></button>
+        <input type="text" name="find_keyword" id="find_keyword" class="form-control find" placeholder="Tìm kiếm post..." spellcheck="false" value=""  enterkeyhint="search"/>
+        <button id="delAll" style="position: absolute; background-color: transparent; border: none; top: 6px; right: 60px; display: none;">
+        <i class="fa fa-times" style="background-color: transparent; color: #bbbbbb;"></i></button>
+      <button  class="btn btn-default" id="find_button" type="button"> 
+        <i style="background-color: transparent; color: #bbbbbb;" class="fas fa-search"></i></button>
     </div>
     <hr style="color: #6f6f6f;"/>
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between m-2">
         <div>
             <label for="orderby" style=" margin-left:10px; color: #6f6f6f;">Sắp xếp:</label>
             <select class="find" style=" height: 30px; margin-top: 10px; padding: 5px 10px 4px;" name="orderby" id="orderby">
@@ -35,7 +39,7 @@
 
             </select>
         </div>
-        <p>Tổng: <span class="find" style="padding: 5px 10px 2px;">@ViewBag.Count</span> </p>
+        <p style="margin-top: 15px;">Tổng: <span class="find" style="padding: 5px 10px 2px;">@ViewBag.Count</span> </p>
     </div>
 </header>
 <div id="post">
@@ -84,7 +88,7 @@
                     <hr style="margin-top:25px;" />
                     <div class="d-flex align-items-center">
                         <div id="pill-wrapper">
-                            <span style="border-radius: 0 20px 0 0 ; padding: 5px 5px 0 2px;  background-color: var(--@item.id_color)">
+                            <span style="border-radius: 0 20px 0 0 ; padding: 5px 5px 0 2px; background-color: var(--@item.id_color)">
                                 <b>@colorName</b>
                             </span>
                             <span class="content" style="font-size: 17px; font-weight: 500; margin-top:5px;">@item.main_content</span>
@@ -106,24 +110,34 @@
             </div>
         </a>
     }
-
-    <div class="text-center mt-3">
-        <div class="d-flex justify-content-end m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
-    </div>
+    <style>
+      
+    </style>
+    <div class=" m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+ 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
 <script src="~/Scripts/jquery-3.7.0.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
-
-        $('#find_button').on('click', function () {
-            searchData();
+        $('#find_button').on('click', function (e) {
+            if ($('#find_keyword').val().trim() !== '') {
+                searchData()
+                $('#find_keyword').val('');
+                $('#delAll').css("display", "none");
+            } else {
+                $('#delAll').css("display", "none");
+            }
         });
 
         $('#find_keyword').on('keydown', function (e) {
-            if (e.key == 'Enter') {
+            if (e.key == 'Enter' && $('#find_keyword').val().trim() !== '') {
                 searchData()
+                $('#find_keyword').val('');
+                $('#delAll').css("display", "none");
+            } else {
+                $('#delAll').css("display", "none");
             }
         });
       
@@ -154,5 +168,16 @@
                 }
             })
         });
+        $('#find_keyword').on('input', function () {
+            if ($(this).val() !== '') {
+                $('#delAll').css("display", "inline"); 
+            }
+        });
+
+
+        $('#delAll').on('click', function () {
+            $('#find_keyword').val('');
+            $(this).css("display", "none");
+        })
     });
 </script>

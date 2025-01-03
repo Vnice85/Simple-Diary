@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +16,20 @@ namespace WebApplication2.Controllers
     {
         private MyDiary db = new MyDiary();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? size)
         {
-            return View(db.Contents.OrderByDescending(c => c.id).ToList());
+            int pageNumber = page ?? 1;
+            int pageSize = size ?? 10;
+            if (Session["filter"] == null || (int)Session["filter"] == 0)
+            {
+                Session["filter"] = 0;
+                var pl = db.Contents.OrderByDescending(c => c.date_upload).ToPagedList(pageNumber, pageSize);
+                ViewBag.Count = db.Contents.Count();
+                return View(pl);
+            }
+            var pagedList = db.Contents.OrderBy(c => c.date_upload).ToPagedList(pageNumber, pageSize);
+            ViewBag.Count = db.Contents.Count();
+            return View(pagedList);
         }
         public ActionResult Detail(int id)
         {

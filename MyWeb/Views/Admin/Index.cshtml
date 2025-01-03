@@ -1,6 +1,8 @@
-﻿@model List<WebApplication2.Models.Content>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebApplication2.Models.Content>
 @{
-    ViewBag.Title = "Nhật ký";
+    ViewBag.Title = "Admin";
 }
 
 <link href="~/Content/DiaryStyle.css" rel="stylesheet" />
@@ -29,7 +31,7 @@
         <button type="submit" style="position: fixed; bottom: 10%; right: 10%;" class="btn btn-outline-danger">Delete</button>
         foreach (var item in Model)
         {
-            <input type="checkbox" name="id" style="float: right; margin-right: 10px; height: 20px; width: 20px;" value="@item.id" />
+            <input type="checkbox" name="id" style="float: right; height: 20px; width: 20px; z-index: 100;" value="@item.id; " />
             string colorName = string.Empty;
             switch (item.id_color)
             {
@@ -92,28 +94,71 @@
 
     }
 
+    <div class=" m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
 
-    <div class="text-center mt-5 pt-5">
-        <hr />
-        <P><b>- THE END -</b></P>
-
-    </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
 <script src="~/Scripts/jquery-3.7.0.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
-        $('#find_keyword').on('input', function () {
-            var search = $(this).val();
-            $.ajax({
-                url: '@Url.Action("Find","diary")',
-                type: 'GET',
-                data: { find_keyword: search },
-                success: function (data) {
-                    $('#post').html(data);
-                }
+        $('#find_button').on('click', function (e) {
+            if ($('#find_keyword').val().trim() !== '') {
+                searchData()
+                $('#find_keyword').val('');
+                $('#delAll').css("display", "none");
+            } else {
+                $('#delAll').css("display", "none");
+            }
+        });
 
+        $('#find_keyword').on('keydown', function (e) {
+            if (e.key == 'Enter' && $('#find_keyword').val().trim() !== '') {
+                searchData()
+                $('#find_keyword').val('');
+                $('#delAll').css("display", "none");
+            } else {
+                $('#delAll').css("display", "none");
+            }
+        });
+
+
+       function searchData() {
+				var searchValue = $('#find_keyword').val();
+				var orderbyValue = $('#orderby').val();
+				$.ajax({
+					url: '@Url.Action("find","diary")',
+					type: 'GET',
+					data: { find_keyword: searchValue, orderby: orderbyValue },
+					success: function (data) {
+						$('#post').html(data);
+					}
+
+				})
+        };
+
+        $('#orderby').on('change', function () {
+            var searchValue = $('#find_keyword').val();
+            var orderbyValue = $('#orderby').val();
+            $.ajax({
+                url: '@Url.Action("filter", "diary")',
+                type: 'GET',
+                data: { find_keyword: searchValue, orderby: orderbyValue },
+                success: function (data) {
+                    $('#post').html(data)
+                }
             })
+        });
+        $('#find_keyword').on('input', function () {
+            if ($(this).val() !== '') {
+                $('#delAll').css("display", "inline");
+            }
+        });
+
+
+        $('#delAll').on('click', function () {
+            $('#find_keyword').val('');
+            $(this).css("display", "none");
         })
-    })
+    });
 </script>

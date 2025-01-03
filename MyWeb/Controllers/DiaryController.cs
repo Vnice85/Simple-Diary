@@ -83,7 +83,7 @@ namespace MyWeb.Controllers
             var x = (from a in db.Contents
                      join b in db.Colors
                      on a.id_color equals b.id_color
-                     where b.color_name.Contains(find_keyword) || a.main_content.Contains(find_keyword) || a.date_upload.ToString().Contains(find_keyword)
+                     where b.color_name.Contains(find_keyword.Trim()) || a.main_content.Contains(find_keyword.Trim()) || a.date_upload.ToString().Contains(find_keyword.Trim())
                      orderby a.date_upload descending
                      select new
                      {
