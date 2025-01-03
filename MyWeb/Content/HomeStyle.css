@@ -1,0 +1,57 @@
+﻿* {
+    color: #6f6f6f;
+}
+
+.fab {
+    background-color: transparent;
+}
+
+html, body {
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
+    padding: 0; /* Loại bỏ padding mặc định */
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    min-height: 100vh; /* Chiếm toàn bộ chiều cao */
+}
+
+body {
+    background-image: url(/Data/blur2.jpg);
+    background-size: cover;
+}
+
+.wrapper {
+    background-color: #0000008c;
+    border-radius: 20px;
+    padding: 50px 20px;
+    margin: 0 10px 0;
+}
+
+html {
+    scrollbar-gutter: auto !important;
+}
+
+.page-content {
+    padding: 20px 0 !important;
+}
+
+nav {
+    display: none;
+}
+
+html.dark-theme .fa,
+html.dark-theme .fab,
+html.dark-theme .fas {
+    background-color: transparent;
+}
+
+.social-network {
+    display: flex;
+    justify-content: space-around
+}
+
+
+@media screen and (max-width : 900px) {
+    .social-network {
+        display: flex;
+        flex-direction: column;
+    }
+}

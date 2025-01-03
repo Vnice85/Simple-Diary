@@ -1,0 +1,45 @@
+﻿
+h1 {
+    color: #171717;
+    font-size: 40px !important;
+    font-weight: bold;
+}
+
+.content {
+    color: #6f6f6f;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+img, iframe {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    margin: 10px 0 !important;
+    aspect-ratio: 1/1;
+}
+
+#main_image {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+}
+
+
+p {
+    color: #6f6f6f;
+}
+
+a:hover {
+    color: black;
+}
+
+html.dark-theme a:hover {
+    color: white;
+}
+
+.btn-outline-dark {
+    color: #6f6f6f;
+}

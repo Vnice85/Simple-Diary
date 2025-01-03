@@ -5,189 +5,7 @@
 @{
     ViewBag.Title = "Nhật ký";
 }
-
-
-<style>
-    * {
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
-    span {
-        margin-right: 10px;
-        color: #6f6f6f;
-        font-size: 14px;
-    }
-
-    .bound {
-        padding: 25px 0;
-        transition: ease-in-out 0.2s;
-        border-radius: 30px;
-    }
-
-        .bound:hover {
-            background-color: #f7f8f9;
-            transform: scale(1.01);
-            transition: ease-in-out 0.4s;
-        }
-
-    b {
-        font-size: 17px;
-    }
-
-
-    .short_content {
-        margin: 0;
-        color: #6f6f6f;
-        font-size: 14px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 26px;
-    }
-
-    p {
-        margin-bottom: 0;
-        color: #6f6f6f;
-        font-size: 14px;
-    }
-
-    .find {
-        background: rgb(249, 249, 249);
-        border: 1px solid rgb(241, 242, 244);
-        max-width: 100%;
-        height: 3.5em;
-        border-radius: 12px;
-        
-    }
-
-        .find:focus {
-            border-color: rgb(241, 242, 244);
-            box-shadow: none;
-            background: rgb(249, 249, 249);
-            color: #6f6f6f;
-            font-weight: bold;
-        }
-
-        .find:not(:focus) {
-            color: #6f6f6f;
-            font-weight: bold;
-        }
-
-        .find::placeholder {
-            color: #6f6f6f;
-            font-weight: bold;
-            opacity: 0.5;
-        }
-
-    html.dark-theme .find {
-        background-color: #222222;
-        border: 1px solid dimgrey;
-        max-width: 100%;
-        height: 3.5em;
-        border-radius: 12px;
-      
-    }
-
-        html.dark-theme .find:focus {
-            border-color: dimgrey;
-            box-shadow: none;
-            background: #222222;
-            color: #6f6f6f;
-            font-weight: bold;
-        }
-
-        html.dark-theme .find:not(:focus) {
-            color: #6f6f6f;
-            font-weight: bold;
-        }
-
-        html.dark-theme .find::placeholder {
-            color: #6f6f6f;
-            font-weight: bold;
-            opacity: 0.5;
-        }
-
-    ::selection {
-        background-color: lightpink;
-        color: white;
-        font-weight: bold;
-    }
-
-    header * {
-        margin-bottom: 10px;
-    }
-
-    .hdsd {
-        padding: 0 5px;
-        border-radius: 20px;
-        text-decoration: none;
-        color: #6f6f6f;
-        background-color: navajowhite;
-        transition: ease-in-out 0.5s;
-    }
-
-        .hdsd:hover {
-            color: #6f6f6f;
-            background-color: burlywood;
-            transition: ease-in-out 0.5s;
-        }
-
-
-    html.dark-theme .bound:hover {
-        background-color: #222222;
-    }
-
-    @@media only screen and (max-width: 700px) {
-
-        #pill-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        #time-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .short_content {
-            margin: 0;
-            color: #6f6f6f;
-            font-size: 14px;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 26px;
-        }
-
-        .pagination li a, .pagination li span {
-            padding: 9px;
-            font-size: 12px;
-        }
-
-        .bound {
-            padding: 15px 0;
-        }
-     
-    }
-    .fas {
-        background-color: white;
-        transition: none;
-    }
-
-</style>
-
+<link href="~/Content/DiaryStyle.css" rel="stylesheet" />
 
 <header style="padding:0 10px;">
     <h1 style="font-weight: bold;">Nhật ký</h1>
@@ -200,24 +18,25 @@
         <i class="fas fa-search"></i></button>
     </div>
     <hr style="color: #6f6f6f;"/>
-    <div class="d-flex align-items-center">
-        <label for="orderby" style="margin: 0 10px; color: #6f6f6f;">Sắp xếp:</label>
-        <select class="find" style="height: 30px; margin-top: 10px;" name="orderby" id="orderby">
-            @if ((int)Session["filter"] == 0)
-            {
-                <option value="0" selected>Mới nhất</option>
-                <option value="1">Cũ nhất</option>
-            }
-            else
-            {
-                <option value="0">Mới nhất</option>
-                <option value="1" selected>Cũ nhất</option>
-            }
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <label for="orderby" style=" margin-left:10px; color: #6f6f6f;">Sắp xếp:</label>
+            <select class="find" style=" height: 30px; margin-top: 10px; padding: 5px 10px 4px;" name="orderby" id="orderby">
+                @if ((int)Session["filter"] == 0)
+                {
+                    <option value="0" selected>Mới nhất</option>
+                    <option value="1">Cũ nhất</option>
+                }
+                else
+                {
+                    <option value="0">Mới nhất</option>
+                    <option value="1" selected>Cũ nhất</option>
+                }
 
-        </select>
+            </select>
+        </div>
+        <p>Tổng: <span class="find" style="padding: 5px 10px 2px;">@ViewBag.Count</span> </p>
     </div>
-
-
 </header>
 <div id="post">
     @foreach (var item in Model)
@@ -226,28 +45,34 @@
         switch (item.id_color)
         {
             case "yellow":
-                colorName = "Thuốc Vàng";
+                colorName = "Màu Vàng";
                 break;
             case "pink":
-                colorName = "Thuốc Hồng";
+                colorName = "Màu Hồng";
                 break;
             case "light-violet":
-                colorName = "Thuốc Tím Nhạt";
+                colorName = "Màu Tím Nhạt";
                 break;
             case "red":
-                colorName = "Thuốc Đỏ";
+                colorName = "Màu Đỏ";
                 break;
             case "violet":
-                colorName = "Thuốc Tím Đậm";
+                colorName = "Màu Tím Đậm";
                 break;
             case "blue":
-                colorName = "Thuốc Xanh";
+                colorName = "Màu Xanh";
                 break;
             case "green":
-                colorName = "Thuốc Xanh";
+                colorName = "Màu Xanh";
+                break;
+            case "gray":
+                colorName = "Màu Xám";
+                break;
+            case "brown":
+                colorName = "Màu Nâu";
                 break;
             default:
-                colorName = "Nhật ký";
+                colorName = "Không Màu";
                 break;
         }
         <a style="text-decoration: none;" href="/diary/detail?id=@item.id">

@@ -77,7 +77,26 @@ namespace WebApplication2.Controllers
             return View(db.Contents.OrderByDescending(c => c.id).ToList());
         }
 
-
+        public ActionResult AddGalleryImage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddGalleryImage(List<HttpPostedFileBase> image)
+        {
+            foreach(var item in image)
+            {
+                if (item != null && item.ContentLength > 0)
+                {
+                    string root = Server.MapPath("/Images");
+                    string extension = Path.GetExtension(item.FileName);
+                    string uniqueName = Path.GetFileNameWithoutExtension(item.FileName) + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+                    string path = Path.Combine(root, uniqueName);
+                    item.SaveAs(path);
+                }
+            }
+            return View();
+        }
 
 
 

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "AddGalleryImage";
+}
+<style>
+    * {
+        color: white;
+    }
+   hr {
+       border: 1px dashed white;
+   }
+</style>
+<div style="background-color: #6f6f6f; padding: 40px; border-radius: 20px;" class="text-center">
+    <h2>AddGalleryImage</h2>
+    <hr/>
+    <form action="/admin/addgalleryimage" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" value="" multiple />
+        <button class="btn btn-danger">Send</button>
+    </form>
+</div>

@@ -1,0 +1,55 @@
+﻿.gallery {
+    display: grid;
+    gap: 3px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+    img:hover {
+        opacity: 0.5;
+        transition: 0.5s ease-in-out;
+    }
+
+.modal-overlay {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); /* Màu nền mờ */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo modal hiển thị trên các phần tử khác */
+}
+
+/* Định dạng ảnh trong modal */
+.modal-image {
+    max-width: 90%; /* Đảm bảo ảnh không vượt quá chiều rộng màn hình */
+    max-height: 90%; /* Đảm bảo ảnh không vượt quá chiều cao màn hình */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Tạo bóng cho ảnh */
+    border-radius: 10px; /* Bo góc ảnh */
+    opacity: 1 !important;
+}
+
+body {
+    animation: none;
+}
+
+/* Thư viện ảnh */
+
+.lazyload {
+    filter: blur(10px); /* Làm mờ ảnh trước khi tải */
+}
+
+
+    .lazyload.loaded {
+        filter: blur(0); /* Hiển thị ảnh rõ ràng khi đã tải */
+    }

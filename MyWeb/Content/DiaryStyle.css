@@ -1,0 +1,161 @@
+﻿* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+span {
+    margin-right: 10px;
+    color: #6f6f6f;
+    font-size: 14px;
+}
+
+.bound {
+    padding: 25px 0;
+    transition: ease-in-out 0.2s;
+    border-radius: 30px;
+}
+
+    .bound:hover {
+        background-color: #f7f8f9;
+        transform: scale(1.01);
+        transition: ease-in-out 0.4s;
+    }
+
+b {
+    font-size: 17px;
+}
+
+
+.short_content {
+    margin: 0;
+    color: #6f6f6f;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 26px;
+}
+
+p {
+    margin-bottom: 0;
+    color: #6f6f6f;
+    font-size: 14px;
+}
+
+.find {
+    background: rgb(249, 249, 249);
+    border: 1px solid rgb(241, 242, 244);
+    max-width: 100%;
+    height: 3.5em;
+    border-radius: 12px;
+}
+
+    .find:focus {
+        border-color: rgb(241, 242, 244);
+        box-shadow: none;
+        background: rgb(249, 249, 249);
+        color: #6f6f6f;
+        font-weight: bold;
+    }
+
+    .find:not(:focus) {
+        color: #6f6f6f;
+        font-weight: bold;
+    }
+
+    .find::placeholder {
+        color: #6f6f6f;
+        font-weight: bold;
+        opacity: 0.5;
+    }
+
+html.dark-theme .find {
+    background-color: #222222;
+    border: 1px solid dimgrey;
+    max-width: 100%;
+    height: 3.5em;
+    border-radius: 12px;
+}
+
+    html.dark-theme .find:focus {
+        border-color: dimgrey;
+        box-shadow: none;
+        background: #222222;
+        color: #6f6f6f;
+        font-weight: bold;
+    }
+
+    html.dark-theme .find:not(:focus) {
+        color: #6f6f6f;
+        font-weight: bold;
+    }
+
+    html.dark-theme .find::placeholder {
+        color: #6f6f6f;
+        font-weight: bold;
+        opacity: 0.5;
+    }
+
+header * {
+    margin-bottom: 10px;
+}
+
+html.dark-theme .bound:hover {
+    background-color: #222222;
+}
+
+@media only screen and (max-width: 700px) {
+
+    #pill-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #time-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .short_content {
+        margin: 0;
+        color: #6f6f6f;
+        font-size: 14px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 26px;
+    }
+
+    .pagination li a, .pagination li span {
+        padding: 9px 15px;
+        font-size: 12px;
+    }
+
+    .bound {
+        padding: 15px 0;
+    }
+}
+
+.fas {
+    background-color: white;
+    transition: none;
+}
+
+.btn-outline-dark {
+    color: #6f6f6f;
+}
+
+html.dark-theme input[type="checkbox"] {
+    opacity: 0.5;
+}

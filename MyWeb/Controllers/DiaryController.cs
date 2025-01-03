@@ -30,10 +30,12 @@ namespace MyWeb.Controllers
             if (Session["filter"] == null || (int)Session["filter"] == 0)
             {
                 Session["filter"] = 0;
-                var pl = db.Contents.OrderByDescending(c => c.id).ToPagedList(pageNumber, pageSize);
+                var pl = db.Contents.OrderByDescending(c => c.date_upload).ToPagedList(pageNumber, pageSize);
+                ViewBag.Count = db.Contents.Count();
                 return View(pl);
             }
-            var pagedList = db.Contents.OrderBy(c => c.id).ToPagedList(pageNumber, pageSize);
+            var pagedList = db.Contents.OrderBy(c => c.date_upload).ToPagedList(pageNumber, pageSize);
+            ViewBag.Count = db.Contents.Count();
             return View(pagedList);
         }
 
@@ -82,7 +84,7 @@ namespace MyWeb.Controllers
                      join b in db.Colors
                      on a.id_color equals b.id_color
                      where b.color_name.Contains(find_keyword) || a.main_content.Contains(find_keyword) || a.date_upload.ToString().Contains(find_keyword)
-                     orderby a.id descending
+                     orderby a.date_upload descending
                      select new
                      {
                          a.id,
@@ -138,12 +140,12 @@ namespace MyWeb.Controllers
             if (orderby == 0)
             {
                 Session["filter"] = 0;
-                result = result.OrderByDescending(x => x.id);
+                result = result.OrderByDescending(x => x.date_upload);
             }
             if (orderby != 0)
             {
                 Session["filter"] = 1;
-                result = result.OrderBy(x => x.id);
+                result = result.OrderBy(x => x.date_upload);
             }
             return PartialView(result.ToPagedList(pageNumber, pageSize));
         }

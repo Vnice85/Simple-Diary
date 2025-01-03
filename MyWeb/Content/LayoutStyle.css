@@ -1,0 +1,129 @@
+﻿:root {
+    --yellow: #FFFFB5;
+    --pink: #FEE1E8;
+    --light-violet: #F3E4F5;
+    --red: #FD8A8A;
+    --violet: #D8BEE5;
+    --blue: #BEDDF1;
+    --green: #D1FEB8;
+    --gray: #ebeced;
+    --brown: #d1b48c;
+    --default: transparent;
+}
+
+::selection {
+    background-color: lightpink;
+    color: white;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+a {
+    text-decoration: none;
+    color: #6f6f6f;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: #6f6f6f;
+    }
+
+/* Theme styling */
+html {
+    background-color: white;
+    /*transition: background-color 0.5s ease-in-out;*/
+}
+
+    html.dark-theme {
+        background-color: #161616;
+    }
+
+body {
+    background-color: inherit;
+    color: black;
+    font-family: "Josefin Sans", serif;
+    transition: color 0.5s ease-in-out;
+}
+
+html.dark-theme body {
+    color: white;
+}
+
+/* Icon bar styling */
+.icon-bar {
+    background-color: #f8f9fa;
+    color: #858585;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    transition: background-color 0.5s ease-in-out;
+}
+
+html.dark-theme .icon-bar {
+    background-color: #222222;
+    transition: 0.1s ease-in-out;
+}
+
+.icon-bar a {
+    font-size: 24px;
+    border-radius: 10px;
+    transition: 0.1s ease-in-out;
+}
+
+    .icon-bar a:active {
+        transform: scale(1.5);
+    }
+
+.fa, .fab, .fas {
+    font-size: 20px;
+    color: #858585;
+    padding: 10px;
+    background-color: #e2e6ea;
+    border-radius: 10px;
+}
+
+html.dark-theme .fa,
+html.dark-theme .fab,
+html.dark-theme .fas {
+    color: #7e7e7e;
+    background-color: #161616;
+}
+
+h1 {
+    color: black;
+}
+
+html.dark-theme h1 {
+    color: white;
+}
+
+/*Page transition animation*/
+.page-content {
+    animation: fade 0.4s ease-in-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.0;
+        transform: translateY(50px);
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+html.dark-theme hr {
+    color: #6f6f6f;
+}
+
+.fixed-bottom {
+    z-index: 10;
+}
