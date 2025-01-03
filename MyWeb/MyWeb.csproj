@@ -881,11 +881,12 @@
     <Content Include="Views\Diary\Detail.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Detail.cshtml" />
-    <Content Include="Views\Admin\Show.cshtml" />
     <Content Include="Views\Diary\Gallery.cshtml" />
     <Content Include="Views\Diary\Filter.cshtml" />
     <Content Include="Views\Diary\Home.cshtml" />
     <Content Include="Views\Admin\AddGalleryImage.cshtml" />
+    <Content Include="Views\Admin\Find.cshtml" />
+    <Content Include="Views\Admin\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

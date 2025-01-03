@@ -22,7 +22,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/LayoutStyle.css" rel="stylesheet" />
-
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <style>
     </style>
 </head>
@@ -45,9 +46,7 @@
         </div>
 
     </div>
-  
-    <script src="~/Scripts/jquery-3.7.0.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
     @Scripts.Render("~/bundles/bootstrap")
 
     <script>
@@ -62,17 +61,21 @@
                     html.classList.add('dark-theme');
                 }
             });
-
+            if (localStorage.getItem('nav') === 'hide') {
+                $('nav').hide();
+                $('.nav_show').show();
+            }
             $('.fa-chevron-down').on('click', function () {
                 $('nav').hide();
                 $('.nav_show').show();
+                localStorage.setItem('nav', 'hide'); 
+            });
 
-            })
             $('.fa-chevron-up').on('click', function () {
                 $('nav').show();
                 $('.nav_show').hide();
-
-            })
+                localStorage.removeItem('nav'); 
+            });
         });
     </script>
 

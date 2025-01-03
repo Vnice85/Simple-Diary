@@ -3,7 +3,17 @@
 @{
     ViewBag.Title = "Thêm mới";
 }
-
+<style>
+    @@media screen and (max-width: 800px) 
+    {
+        .form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+</style>
 <script src="~/Scripts/jquery-3.7.0.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 @*@using (Html.BeginForm("create","admin", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
@@ -17,7 +27,7 @@
     <div class="form-horizontal mt-5" id="show">
         <div class="text-center"><h1>THÊM NHẬT KÝ</h1></div>
         <hr />
-        <div class="d-flex">
+        <div class="d-flex form">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group m-4">
@@ -37,7 +47,7 @@
             </div>
 
             <div class="form-group m-4">
-                <label for="id_color">Pill</label>
+                <label for="id_color">Topic color</label>
                 <div class="col-md-10">
                     <select name="id_color" class="form-select">
                         @foreach (var item in ViewBag.id_color)
@@ -100,8 +110,8 @@
 
 
 
-<div class="mt-5">
-    @Html.ActionLink("Back to Home", "Index", "Admin")
+<div class="mt-5 text-center">
+    @Html.ActionLink("Back to Admin page", "Index", "Admin")
 </div>
 
 
