@@ -337,14 +337,16 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Data\4.jpg" />
     <Content Include="Data\Audio\Ghé Qua - Dick x Tofu x PC [Official Audio].mp3" />
     <Content Include="Data\drug.jpg" />
-    <Content Include="Data\profile-modified.jpg" />
+    <Content Include="Data\Screenshot 2025-01-01 013522.png" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\profile.jpg" />
+    <Content Include="Data\blur2.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

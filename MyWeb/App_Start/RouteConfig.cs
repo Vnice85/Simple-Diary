@@ -19,6 +19,7 @@ namespace MyWeb
                 defaults: new { controller = "Diary", action = "Home", id = UrlParameter.Optional },
                 namespaces: new[] { "MyWeb.Controllers" }
             );
+
         
 
         }
