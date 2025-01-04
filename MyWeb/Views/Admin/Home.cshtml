@@ -13,6 +13,9 @@
             flex-direction: column;
             
         }
+        .add * {
+            margin-bottom: 20px;
+        }
     }
 </style>
 <header style="padding:0px;">
@@ -23,6 +26,7 @@
     <div class="d-flex justify-content-around m-2 add">
         <a href="/admin/create" class="btn btn-outline-dark" title="Thêm mới">+ Thêm mới nhật ký</a>
         <a href="/admin/addgalleryimage" class="btn btn-outline-dark" title="Thêm mới">+ Thêm mới ảnh vào thư viện</a>
+        <a href="/admin/deletegalleryimage" class="btn btn-outline-dark" title="Thêm mới">+ Chỉnh sửa thư viện</a>
     </div>
     <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
     <p style="margin:0 0 15px 15px;">Tìm kiếm nhật ký dựa theo màu sắc, nội dung chính: </p>
@@ -129,12 +133,10 @@
 
     }
 
-    <div class=" m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+    <div class=" m-3 pagination">  @Html.PagedListPager(Model, page => Url.Action("Home", new { page }))</div>
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
-<script src="~/Scripts/jquery-3.7.0.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
         $('#find_button').on('click', function (e) {

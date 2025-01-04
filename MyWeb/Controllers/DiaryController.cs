@@ -48,35 +48,6 @@ namespace MyWeb.Controllers
         {
             return View();
         }
-        public ActionResult Text()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult Text(string text)
-        {
-            ViewBag.Text = text;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upload)
-        {
-            if (upload != null && upload.ContentLength > 0)
-            {
-                string root = Server.MapPath("/Data");
-                string x = Path.Combine(root, Path.GetFileName(upload.FileName));
-                upload.SaveAs(x);
-
-            }
-            return Json(new
-            {
-                uploaded = true,
-                url = Url.Content("~/Data/" + Path.GetFileName(upload.FileName))
-            });
-
-        }
 
         public PartialViewResult Find(string find_keyword)
         {

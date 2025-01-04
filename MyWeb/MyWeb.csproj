@@ -347,9 +347,8 @@
     <Content Include="Data\7.jpg" />
     <Content Include="Data\8.jpg" />
     <Content Include="Data\9.jpg" />
-    <Content Include="Data\Audio\Ghé Qua - Dick x Tofu x PC [Official Audio].mp3" />
-    <Content Include="Data\drug.jpg" />
     <Content Include="Data\5.jpg" />
+    <Content Include="Data\Audio\ghequa.mp3" />
     <Content Include="Data\Screenshot 2025-01-01 013522.png" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.svg" />
@@ -359,6 +358,12 @@
     <Content Include="Images\0831240613_HDR.jpg" />
     <Content Include="Images\1117240906.jpg" />
     <Content Include="Images\1117240919a.jpg" />
+    <Content Include="Images\12.jpg" />
+    <Content Include="Images\13.jpg" />
+    <Content Include="Images\14.jpg" />
+    <Content Include="Images\15.jpg" />
+    <Content Include="Images\16.jpg" />
+    <Content Include="Images\17.jpg" />
     <Content Include="Images\3.jpg" />
     <Content Include="Images\4 %282%29.jpeg" />
     <Content Include="Images\5.jpg" />
@@ -879,7 +884,7 @@
     <Content Include="Views\Diary\Find.cshtml" />
     <Content Include="Views\Diary\PageNotFound.cshtml" />
     <Content Include="Views\Diary\Detail.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\Admin\Detail.cshtml" />
     <Content Include="Views\Diary\Gallery.cshtml" />
     <Content Include="Views\Diary\Filter.cshtml" />
@@ -887,10 +892,10 @@
     <Content Include="Views\Admin\AddGalleryImage.cshtml" />
     <Content Include="Views\Admin\Find.cshtml" />
     <Content Include="Views\Admin\Filter.cshtml" />
+    <Content Include="Views\Admin\DeleteGalleryImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -14,20 +14,32 @@
         </p>
     </div>
     <hr style="border: 1px dashed; margin: 30px 0;" />
-    <div class="gallery d-grid">
-        @foreach (var item in Model)
-        {
-          <img data-src="@item" alt="img" class="lazyload" />
-        }
-    </div>
+    <form action="/admin/DeleteGalleryImage" method="post">
+        <div class="gallery d-grid">
+            <button type="submit" style="position: fixed; bottom: 10%; right: 10%;" class="btn btn-outline-danger">Delete</button>
+            @foreach (var item in Model)
+            {
+                <div>
+                    <input type="checkbox" name="deleteItems" value="@item" style="float: right; width: 30px; height: 30px;" />
+                    <a><img data-src="@item" alt="img" class="lazyload" /></a>
+                </div>
+            }
+
+        </div>
+    </form>
 </article>
 <div class="d-flex justify-content-center mt-5">
     <a class="ig_link" href="https://www.instagram.com/van_vnice"><b>Instagram của tớ..</b></a>
 </div>
 
+<div class="mt-5 text-center">
+    @Html.ActionLink("Back to Admin page", "Home", "Admin")
+</div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const galleryImages = document.querySelectorAll(".gallery img");
+
+
+        const galleryImages = document.querySelectorAll(".gallery a img");
         const modalOverlay = document.createElement("div");
         modalOverlay.classList.add("modal-overlay");
 

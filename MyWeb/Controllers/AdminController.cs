@@ -16,7 +16,7 @@ namespace WebApplication2.Controllers
     {
         private MyDiary db = new MyDiary();
 
-        public ActionResult Index(int? page, int? size)
+        public ActionResult Home(int? page, int? size)
         {
             int pageNumber = page ?? 1;
             int pageSize = size ?? 10;
@@ -80,7 +80,7 @@ namespace WebApplication2.Controllers
                 db.Contents.Remove(x);
                 db.SaveChanges();
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Home");
         }
 
         public ActionResult AddGalleryImage()
@@ -101,8 +101,60 @@ namespace WebApplication2.Controllers
                     item.SaveAs(path);
                 }
             }
-            return View();
+            return RedirectToAction("Home");
         }
+        public ActionResult DeleteGalleryImage()
+        {
+            var imglist = new List<string>();
+            string root = Server.MapPath("/Images"); // Thư mục gốc chứa ảnh
+
+            if (Directory.Exists(root))
+            {
+                var imageExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff" }; // Các định dạng file ảnh
+                var files = Directory.GetFiles(root);
+
+                foreach (var file in files)
+                {
+                    // Kiểm tra xem file có thuộc định dạng ảnh không
+                    if (Array.Exists(imageExtensions, ext => ext.Equals(Path.GetExtension(file), StringComparison.OrdinalIgnoreCase)))
+                    {
+                        // Chuyển đường dẫn tuyệt đối thành đường dẫn tương đối
+                        string relativePath = "/Images/" + Path.GetFileName(file);
+                        imglist.Add(relativePath);
+                    }
+                }
+            }
+            return View(imglist);
+        }
+        [HttpPost]
+        public ActionResult DeleteGalleryImage(List<string> deleteItems)
+        {
+            string root = Server.MapPath("/Images"); 
+
+            if (deleteItems != null && deleteItems.Any())
+            {
+                foreach (var item in deleteItems)
+                {
+                    string filePath = Server.MapPath(item); // Chuyển đổi đường dẫn tương đối thành đường dẫn tuyệt đối
+
+                    // Kiểm tra nếu tệp tin tồn tại
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(filePath); // Xóa tệp tin
+                        }
+                        catch (Exception ex)
+                        {
+                            // Xử lý lỗi nếu có (Ví dụ: Không thể xóa tệp)
+                            ModelState.AddModelError("", "Lỗi khi xóa ảnh: " + ex.Message);
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("DeleteGalleryImage");
+        }
+
         public PartialViewResult Find(string find_keyword)
         {
             var x = (from a in db.Contents
@@ -173,6 +225,24 @@ namespace WebApplication2.Controllers
                 result = result.OrderBy(x => x.date_upload);
             }
             return PartialView(result.ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload)
+        {
+            if (upload != null && upload.ContentLength > 0)
+            {
+                string root = Server.MapPath("/Data");
+                string x = Path.Combine(root, Path.GetFileName(upload.FileName));
+                upload.SaveAs(x);
+
+            }
+            return Json(new
+            {
+                uploaded = true,
+                url = Url.Content("~/Data/" + Path.GetFileName(upload.FileName))
+            });
+
         }
 
 

@@ -1,15 +1,21 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Introduction";
 }
 
 <link href="~/Content/HomeStyle.css" rel="stylesheet" />
-
 <div class="wrapper text-center">
     <img src="~/Images/profile.jpg" alt="Alternate Text" style="max-width: 200px; aspect-ratio: 1/1; border-radius: 100%; " />
     <p style="font-size: 50px; font-weight: bold; margin-top: 10px; border-bottom: 1px dashed #6f6f6f; border-radius: 20px;">Van - Vnice</p>
-    <p style="margin-bottom: 30px; border-bottom: 1px dashed #6f6f6f; border-radius: 20px; padding: 10px 0 20px;">Cựu thiếu nhi, con của bố mẹ, em của các anh, anh của các em - một người thường</p>
-    <div style="text-align: justify; padding: 0 20px;">
+    <div style="position: relative; margin-bottom: 30px; border-bottom: 1px dashed #6f6f6f; border-radius: 20px; padding: 10px 0 20px;">
+        <button style="background-color: transparent; border: none;" id="play-button"><i class="fa fa-play"></i> Ghé Qua - Dick x Tofu x PC</button>
+        <button style=" background-color: transparent; display: none; border: none; animation: 1s pulse infinite; " id="pause-button" ><i class="fa fa-pause"></i> Ghé Qua - Dick x Tofu x PC</button>
+    </div>
+    <audio id="audio" controls="controls" style="display: none;">
+        <source src="~/Data/Audio/ghequa.mp3" type="audio/mp3" />
+        <source src="~/Data/Audio/ghequa.mp3" type="audio/ogg" />
+    </audio>
+   
+    <div style="text-align: justify; padding: 0 10px;">
         <p style="margin-bottom: 0px;   ">
             Hi guys !! Tớ tên thật là Vấn, sinh viên chuyên ngành Khoa học máy tính tại HaUI. Tớ có rất nhiều sở thích,
             một vài sở thích của tớ mà tớ có thể kể cho cậu đó là ăn, ngủ, nghe nhạc và chơi Piano.
@@ -24,14 +30,28 @@
             chắc hẳn là chúng ta có duyên rồi. Vậy thì sao không lập tức kết nối, và cùng chém gió về mọi thứ trên đời !? :>
         </p>
         <div class="social-network">
-            <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"> </i><span class="social-network-name">: Vấn</span> </a> 
-            <a href="https://www.instagram.com/van_vnice" target="_blank" title="Instagram"><i class="fab fa-instagram"></i><span class="social-network-name">: van_vnice</span> </a> 
-            <a href="https://www.tiktok.com/&commat;vnice85" target="_blank" title="Tiktok"><i class="fab fa-tiktok"></i><span class="social-network-name">: vnice85</span> </a> 
+            <a href="https://facebook.com/van85204" target="_blank" title="Facebook"><i class="fab fa-facebook"> </i><span class="social-network-name">: Vấn</span> </a>
+            <a href="https://www.instagram.com/van_vnice" target="_blank" title="Instagram"><i class="fab fa-instagram"></i><span class="social-network-name">: van_vnice</span> </a>
+            <a href="https://www.tiktok.com/&commat;vnice85" target="_blank" title="Tiktok"><i class="fab fa-tiktok"></i><span class="social-network-name">: vnice85</span> </a>
         </div>
         <div class="text-center ">
             <hr style="border: 1px dashed #6f6f6f; flex-grow: 1; margin-right: 10px;" />
-            <a href="/diary/index" class="btn btn-outline-danger mt-3">Khám phá</a>
+            <a href="/diary/index" id="button-test" class="btn btn-outline-danger mt-3">Khám phá</a>
         </div>
 
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#play-button').on('click', function () {
+            $('#audio')[0].play();
+            $(this).hide();
+            $('#pause-button').show();
+        })
+        $('#pause-button').on('click', function () {
+            $('#audio')[0].pause();
+            $(this).hide();
+            $('#play-button').show();
+        })
+    })
+</script>

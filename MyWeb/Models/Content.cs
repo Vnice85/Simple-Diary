@@ -15,7 +15,7 @@ namespace WebApplication2.Models
         public string main_content { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(100)]
         public string main_image { get; set; }
 
         [StringLength(20)]

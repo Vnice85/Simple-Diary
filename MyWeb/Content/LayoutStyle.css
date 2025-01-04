@@ -125,3 +125,20 @@ html.dark-theme hr {
 .fixed-bottom {
     z-index: 10;
 }
+
+#loader {
+    animation: 1s loading infinite;
+    
+    background-color: transparent;
+}
+
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

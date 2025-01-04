@@ -23,17 +23,18 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/LayoutStyle.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.7.0.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <style>
-    </style>
+
 </head>
 
 <body>
-    <div class="page-content" style="max-width: 800px; margin: 0 auto; padding: 50px 10px 300px;">
+    <div id="loader" class="text-center">
+        <p style="padding-top: 10rem;">I'm loading, just chill ...</p>
+    </div>
+    <div class="page-content" style="max-width: 800px; margin: 0 auto; padding: 50px 10px 300px; display: none;">
         @RenderBody()
         <nav class="container p-3 mt-5 fixed-bottom" style="max-width: 550px;">
             <div class="icon-bar w-100">
-                <a href="/diary/index" title="Home"><i class="fa fa-home" ></i></a> |
+                <a href="/diary/index" title="Home"><i class="fa fa-home"></i></a> |
                 <a href="/" title="About"><i class="fa fa-user"></i></a>
                 <a href="/diary/gallery" title="Gallery"><i class="fa fa-image"></i></a>
                 <a id="theme-toggle" title="Theme"><i class="fa fa-sun"></i></a>|
@@ -42,7 +43,7 @@
 
         </nav>
         <div class="fixed-bottom nav_show text-center" style="display: none;">
-            <a ><i class="fa fa-chevron-up"></i></a>
+            <a><i class="fa fa-chevron-up"></i></a>
         </div>
 
     </div>
@@ -50,6 +51,10 @@
     @Scripts.Render("~/bundles/bootstrap")
 
     <script>
+        $(window).on('load', function () {
+                $('#loader').hide();
+                $('.page-content').show();
+        });
         $(document).ready(function () {
             const html = document.documentElement;
             $('#theme-toggle').on('click', function (e) {
@@ -68,17 +73,16 @@
             $('.fa-chevron-down').on('click', function () {
                 $('nav').hide();
                 $('.nav_show').show();
-                localStorage.setItem('nav', 'hide'); 
+                localStorage.setItem('nav', 'hide');
             });
 
             $('.fa-chevron-up').on('click', function () {
                 $('nav').show();
                 $('.nav_show').hide();
-                localStorage.removeItem('nav'); 
+                localStorage.removeItem('nav');
             });
         });
     </script>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

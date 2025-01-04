@@ -4,8 +4,7 @@
     ViewBag.Title = "Thêm mới";
 }
 <style>
-    @@media screen and (max-width: 800px) 
-    {
+    @@media screen and (max-width: 800px) {
         .form {
             display: flex;
             justify-content: center;
@@ -14,13 +13,8 @@
         }
     }
 </style>
-<script src="~/Scripts/jquery-3.7.0.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 @*@using (Html.BeginForm("create","admin", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
-@using(Ajax.BeginForm("create", "diary", new AjaxOptions
-{
-   
-}, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("create", "admin", FormMethod.Post,  new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -64,8 +58,7 @@
             <label>Nội dung nhật ký: </label>
             <div>
 
-                <textarea id="text" name="content1" style="background-color: black"></textarea>
-                @*@Html.TextAreaFor(model => model.content1, new { @id = "text" })*@
+                @Html.TextAreaFor(model => model.content1, new { @id = "text" })
                 @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -77,13 +70,12 @@
 
     </div>
 }
-
 <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('text', {
-        filebrowserUploadUrl: "/diary/upload",
+        filebrowserUploadUrl: "/admin/upload",
         allowedContent: true, // Tắt bộ lọc nội dung (ACF)
-        extraAllowedContent: 'iframe[*]', // Cho phép iframe và mọi thuộc tính của nó
+        extraAllowedContent: 'iframe[*]', // Cho phép iframe và mọi thuộc tính
         on: {
             instanceReady: function (evt) {
                 var editor = evt.editor;
@@ -101,19 +93,11 @@
             }
         }
     });
-   
+
 </script>
-
-
-
-
-
-
-
 <div class="mt-5 text-center">
-    @Html.ActionLink("Back to Admin page", "Index", "Admin")
+    @Html.ActionLink("Back to Admin page", "Home", "Admin")
 </div>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

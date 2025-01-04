@@ -15,11 +15,11 @@
     <h2>AddGalleryImage</h2>
     <hr />
     <form action="/admin/addgalleryimage" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" value="" multiple />
+        <input type="file" name="image" value="" multiple style="margin-bottom: 50px;" />
         <button class="btn btn-danger">Send</button>
     </form>
 </div>
 
 <div class="mt-5 text-center">
-    @Html.ActionLink("Back to Admin page", "Index", "Admin")
+    @Html.ActionLink("Back to Admin page", "Home", "Admin")
 </div>
