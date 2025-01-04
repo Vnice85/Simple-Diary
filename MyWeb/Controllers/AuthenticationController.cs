@@ -16,7 +16,7 @@ namespace MyWeb.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            if(username == "your" && password == "account")
+            if(username == "" && password == "")
             {
                 Session["vnice"] = username;
                 return RedirectToAction("Home", "Admin");
