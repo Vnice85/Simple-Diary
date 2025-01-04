@@ -152,6 +152,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\DiaryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -348,7 +349,7 @@
     <Content Include="Data\8.jpg" />
     <Content Include="Data\9.jpg" />
     <Content Include="Data\5.jpg" />
-    <Content Include="Data\Audio\ghequa.mp3" />
+    <Content Include="Data\Audio\music.mp3" />
     <Content Include="Data\Screenshot 2025-01-01 013522.png" />
     <Content Include="favicon.ico" />
     <Content Include="favicon.svg" />
@@ -358,12 +359,6 @@
     <Content Include="Images\0831240613_HDR.jpg" />
     <Content Include="Images\1117240906.jpg" />
     <Content Include="Images\1117240919a.jpg" />
-    <Content Include="Images\12.jpg" />
-    <Content Include="Images\13.jpg" />
-    <Content Include="Images\14.jpg" />
-    <Content Include="Images\15.jpg" />
-    <Content Include="Images\16.jpg" />
-    <Content Include="Images\17.jpg" />
     <Content Include="Images\3.jpg" />
     <Content Include="Images\4 %282%29.jpeg" />
     <Content Include="Images\5.jpg" />
@@ -893,6 +888,7 @@
     <Content Include="Views\Admin\Find.cshtml" />
     <Content Include="Views\Admin\Filter.cshtml" />
     <Content Include="Views\Admin\DeleteGalleryImage.cshtml" />
+    <Content Include="Views\Authentication\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

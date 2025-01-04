@@ -18,6 +18,10 @@ namespace WebApplication2.Controllers
 
         public ActionResult Home(int? page, int? size)
         {
+            if (Session["vnice"]  == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             int pageNumber = page ?? 1;
             int pageSize = size ?? 10;
             if (Session["filter"] == null || (int)Session["filter"] == 0)
@@ -39,6 +43,10 @@ namespace WebApplication2.Controllers
 
         public ActionResult Create()
         {
+            if (Session["vnice"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             ViewBag.id_color = db.Colors.ToList();
             return View();
         }
@@ -85,12 +93,20 @@ namespace WebApplication2.Controllers
 
         public ActionResult AddGalleryImage()
         {
+            if (Session["vnice"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             return View();
         }
         [HttpPost]
         public ActionResult AddGalleryImage(List<HttpPostedFileBase> image)
         {
-            foreach(var item in image)
+            if (Session["vnice"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            foreach (var item in image)
             {
                 if (item != null && item.ContentLength > 0)
                 {
@@ -105,6 +121,10 @@ namespace WebApplication2.Controllers
         }
         public ActionResult DeleteGalleryImage()
         {
+            if (Session["vnice"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             var imglist = new List<string>();
             string root = Server.MapPath("/Images"); // Thư mục gốc chứa ảnh
 
@@ -157,6 +177,7 @@ namespace WebApplication2.Controllers
 
         public PartialViewResult Find(string find_keyword)
         {
+
             var x = (from a in db.Contents
                      join b in db.Colors
                      on a.id_color equals b.id_color
