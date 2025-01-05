@@ -18,8 +18,12 @@
         <input type="file" name="image" value="" multiple style="margin-bottom: 50px;" />
         <button class="btn btn-danger">Send</button>
     </form>
+    @if (ViewBag.Status != null)
+    {
+        <p class="text-danger">@ViewBag.Status</p>
+    }
 </div>
 
-<div class="mt-5 text-center">
-    @Html.ActionLink("Back to Admin page", "Home", "Admin")
+<div class="text-center mt-5">
+    @Html.ActionLink("Back to Admin Page", "Home", null, new { @class = "btn btn-outline-primary" })
 </div>

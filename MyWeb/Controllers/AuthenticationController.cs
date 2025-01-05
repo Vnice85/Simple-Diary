@@ -16,9 +16,10 @@ namespace MyWeb.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            if(username == "" && password == "")
+            if(username == "your" && password == "account")
             {
                 Session["vnice"] = username;
+                Session.Timeout = 36000;
                 return RedirectToAction("Home", "Admin");
             }
             ViewBag.Login = "Quên mật khẩu hay tên tài khoản à?";

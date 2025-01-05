@@ -13,63 +13,73 @@
         }
     }
 </style>
-@*@using (Html.BeginForm("create","admin", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
-@using (Html.BeginForm("create", "admin", FormMethod.Post,  new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal mt-5" id="show">
-        <div class="text-center"><h1>THÊM NHẬT KÝ</h1></div>
-        <hr />
-        <div class="d-flex form">
+<div class="container shadow p-2">
+    @if (ViewBag.Status != null)
+    {
+        <p class="text-danger">@ViewBag.Status</p>
+    }
+    @using (Html.BeginForm("create", "admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group m-4">
-                <label for="main_content">Title</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.main_content, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.main_content, "", new { @class = "text-danger" })
+        <div class="form-horizontal mt-5" id="show">
+            <div class="text-center"><h1>THÊM NHẬT KÝ</h1></div>
+            <hr />
+            <div class="d-flex form">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group m-4">
+                    <label for="main_content">Title</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.main_content, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.main_content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group m-4">
+                    <label for="main_imag">Main Image</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.main_image, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                        @Html.ValidationMessageFor(model => model.main_image, "", new { @class = "text-danger" })
+                    </div> or <br />
+                    <label for="main_image2">Main Image link</label>
+                    <div class="col-md-10">
+                        <input type="text" name="imageLink" value="" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group m-4">
+                    <label for="id_color">Topic color</label>
+                    <div class="col-md-10">
+                        <select name="id_color" class="form-select">
+                            @foreach (var item in ViewBag.id_color)
+                            {
+                                <option value="@item.id_color" style="background-color: var(--@item.id_color)">@item.color_name</option>
+                            }
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group m-3">
+                <label>Nội dung nhật ký: </label>
+                <div>
+                    @Html.TextAreaFor(model => model.content1, new { @id = "text" })
+                    @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group m-4">
-                <label for="main_imag">Main Image</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.main_image, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                    @Html.ValidationMessageFor(model => model.main_image, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <div class="form-group d-flex justify-content-center">
+                <input class="btn btn-outline-danger w-100 m-5" id="button" type="submit" value="Create" />
 
-            <div class="form-group m-4">
-                <label for="id_color">Topic color</label>
-                <div class="col-md-10">
-                    <select name="id_color" class="form-select">
-                        @foreach (var item in ViewBag.id_color)
-                        {
-                            <option value="@item.id_color" style="background-color: var(--@item.id_color)">@item.color_name</option>
-                        }
-                    </select>
-
-                </div>
             </div>
 
         </div>
-        <div class="form-group m-3">
-            <label>Nội dung nhật ký: </label>
-            <div>
+    }
+</div>
 
-                @Html.TextAreaFor(model => model.content1, new { @id = "text" })
-                @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group d-flex justify-content-center">
-            <input class="btn btn-outline-danger w-100 m-5" id="button" type="submit" value="Create" />
-
-        </div>
-
-    </div>
-}
 <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('text', {
@@ -94,9 +104,10 @@
         }
     });
 
+
 </script>
-<div class="mt-5 text-center">
-    @Html.ActionLink("Back to Admin page", "Home", "Admin")
+<div class="text-center mt-5">
+    @Html.ActionLink("Back to Admin Page", "Home", null, new { @class = "btn btn-outline-primary" })
 </div>
 
 @section Scripts {

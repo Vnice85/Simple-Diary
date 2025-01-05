@@ -1,0 +1,85 @@
+﻿@model WebApplication2.Models.Content
+
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    textarea {
+        max-width: 100%;
+        max-height: 100%;
+        resize: vertical; /* Cho phép thay đổi kích thước dọc */
+    }
+
+    .form-container {
+        max-width: 800px; /* Giới hạn chiều rộng tối đa của form */
+        width: 100%; /* Đảm bảo form chiếm toàn bộ chiều rộng trong khung nhìn nhỏ */
+    }
+
+    .form-control {
+        width: 100%; /* Tự động co dãn theo container */
+    }
+
+    .btn {
+        min-width: 150px; /* Đảm bảo nút có kích thước đồng nhất */
+    }
+</style>
+
+<div class="container d-flex flex-column justify-content-center align-items-center p-4">
+    @if (ViewBag.Status != null)
+    {
+        <p class="text-danger">@ViewBag.Status</p>
+    }
+    <div class="form-container shadow p-4 bg-white rounded">
+        @using (Html.BeginForm("edit", "admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4 class="text-center">Edit</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id)
+
+                <!-- Main Content -->
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.main_content, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.main_content, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.main_content, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Main Image -->
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.main_image, htmlAttributes: new { @class = "form-label" })
+                    <input type="file" name="main_image" value="" class="form-control" /> or <br />
+                    <label>Main image link</label>
+                    <input type="text" name="imageLink" value="" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.main_image, "", new { @class = "text-danger" })
+                    <img src="@Model.main_image" style="width:50%; aspect-ratio: 1/1; margin-top: 20px; object-fit: cover; border-radius: 20px" alt="Alternate Text" />
+                </div>
+
+                <!-- ID Color -->
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.id_color, htmlAttributes: new { @class = "form-label" })
+                    @Html.DropDownList("id_color", null, new { @class = "form-control" })
+                </div>
+
+                <!-- Content1 -->
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.content1, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextAreaFor(model => model.content1, new { @class = "form-control", @rows = "10" })
+                    @Html.ValidationMessageFor(model => model.content1, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Save Button -->
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-outline-success mt-3" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Back to List -->
+    <div class="text-center mt-5">
+        @Html.ActionLink("Back to Admin Page", "Home", null, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>

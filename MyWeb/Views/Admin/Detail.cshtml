@@ -5,6 +5,7 @@
 <link href="~/Content/DetailStyle.css" rel="stylesheet" />
 
 <div class="detail p-3">
+    <a href="/admin/edit?id=@Model.id" class="btn btn-outline-dark" title="Thêm mới" style="float:right; margin-right: 10px;"><i class="fa-solid fa-ellipsis"></i></a>
     <a href="/admin/delete?id=@Model.id" class="btn btn-outline-dark" title="Thêm mới" style="float:right; margin-right: 10px;"><i class="fa-solid fa-trash"></i></a>
     <h1>@Model.main_content</h1>
     <p style="font-size: 14px;"> @Model.date_upload.Value.ToString("'Ngày' dd 'tháng' MM 'năm' yyyy")</p>
@@ -26,4 +27,4 @@
 
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>

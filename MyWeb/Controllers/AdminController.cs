@@ -18,7 +18,7 @@ namespace WebApplication2.Controllers
 
         public ActionResult Home(int? page, int? size)
         {
-            if (Session["vnice"]  == null)
+            if (Session["vnice"] == null)
             {
                 return RedirectToAction("Login", "Authentication");
             }
@@ -54,32 +54,89 @@ namespace WebApplication2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(Content content, HttpPostedFileBase main_image)
+        public ActionResult Create(Content content, HttpPostedFileBase main_image, string imageLink)
         {
-            var tmp = new Content();
-            if (main_image != null && main_image.ContentLength > 0)
+            try
             {
-                string root = Server.MapPath("/Data");
-                string path = Path.Combine(root, Path.GetFileName(main_image.FileName));
-                main_image.SaveAs(path);
-                tmp.main_image = "/Data/" + Path.GetFileName(main_image.FileName);
+                var tmp = new Content();
+                imageLink = imageLink.Trim();
+                if (main_image != null && main_image.ContentLength > 0)
+                {
+                    string root = Server.MapPath("/Data");
+                    string path = Path.Combine(root, Path.GetFileName(main_image.FileName));
+                    main_image.SaveAs(path);
+                    tmp.main_image = "/Data/" + Path.GetFileName(main_image.FileName);
+                }
+                else if (imageLink != "")
+                {
+                    tmp.main_image = imageLink;
+                }
+                else
+                {
+                    ViewBag.Status = "ERROR";
+                    ViewBag.id_color = db.Colors.ToList();
+                    return View(content);
+                }
+                tmp.main_content = content.main_content;
+                tmp.id_color = content.id_color;
+                tmp.date_upload = DateTime.Now;
+                tmp.content1 = content.content1;
+                db.Contents.Add(tmp);
+                db.SaveChanges();
             }
-            else
+            catch
             {
                 ViewBag.id_color = db.Colors.ToList();
+                ViewBag.Status = "ERROR";
                 return View(content);
             }
-            tmp.main_content = content.main_content;
-            tmp.id_color = content.id_color;
-            tmp.date_upload = DateTime.Now;
-            tmp.content1 = content.content1;
-            db.Contents.Add(tmp);
-            db.SaveChanges();
             ViewBag.id_color = db.Colors.ToList();
             return View(content);
 
         }
- 
+        public ActionResult Edit(int id)
+        {
+            if (Session["vnice"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            var x = db.Contents.Find(id);
+            ViewBag.id_color = new SelectList(db.Colors, "id_color", "color_name", x.id_color);
+
+            return View(x);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(Content content, HttpPostedFileBase main_image, string imageLink)
+        {
+            try
+            {
+                var editedContent = db.Contents.Find(content.id);
+                imageLink = imageLink.Trim();
+                if (main_image != null && main_image.ContentLength > 0)
+                {
+                    string root = Server.MapPath("/Data");
+                    string path = Path.Combine(root, Path.GetFileName(main_image.FileName));
+                    main_image.SaveAs(path);
+                    editedContent.main_image = "/Data/" + Path.GetFileName(main_image.FileName);
+                }
+                else if (imageLink != "")
+                {
+                    editedContent.main_image = imageLink;
+                }
+                editedContent.main_content = content.main_content;
+                editedContent.id_color = content.id_color;
+                editedContent.content1 = content.content1;
+                db.SaveChanges();
+            }
+            catch
+            {
+                ViewBag.Status = "ERROR";
+                return View();
+            }
+            return RedirectToAction("detail", new { id = content.id });
+        }
+
         public ActionResult Delete(List<int> id)
         {
             foreach (var item in id)
@@ -102,20 +159,35 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult AddGalleryImage(List<HttpPostedFileBase> image)
         {
-            if (Session["vnice"] == null)
+            try
             {
-                return RedirectToAction("Login", "Authentication");
-            }
-            foreach (var item in image)
-            {
-                if (item != null && item.ContentLength > 0)
+                if (Session["vnice"] == null)
                 {
-                    string root = Server.MapPath("/Images");
-                    string extension = Path.GetExtension(item.FileName);
-                    string uniqueName = Path.GetFileNameWithoutExtension(item.FileName) + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
-                    string path = Path.Combine(root, uniqueName);
-                    item.SaveAs(path);
+                    return RedirectToAction("Login", "Authentication");
                 }
+                
+                foreach (var item in image)
+                {
+                    if (item != null && item.ContentLength > 0)
+                    {
+                        string root = Server.MapPath("/Images");
+                        string extension = Path.GetExtension(item.FileName);
+                        string uniqueName = Path.GetFileNameWithoutExtension(item.FileName) + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+                        string path = Path.Combine(root, uniqueName);
+                        item.SaveAs(path);
+                    }
+                    else
+                    {
+                        ViewBag.Status = "ERROR";
+                        return View();
+                    }
+                }
+             
+            }
+            catch
+            {
+                ViewBag.Status = "ERROR";
+                return View();
             }
             return RedirectToAction("Home");
         }
@@ -149,7 +221,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult DeleteGalleryImage(List<string> deleteItems)
         {
-            string root = Server.MapPath("/Images"); 
+            string root = Server.MapPath("/Images");
 
             if (deleteItems != null && deleteItems.Any())
             {
